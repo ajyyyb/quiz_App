@@ -1,16 +1,17 @@
-# test_1
+# quiz_App
 
-A new Flutter project.
+A small true or false quiz in Flutter. The questions and buttons are in Kyrgyz.
 
-## Getting Started
+## How it works
 
-This project is a starting point for a Flutter application.
+- One question at a time with two big buttons, "Туура" (true) and "Tuura emes" (false).
+- Every correct answer adds a point.
+- After the last question a dialog shows the result as `score/questions` and offers to restart.
+- The questions live in one list in `lib/main.dart`, so adding a question is one more line.
 
-A few resources to get you started if this is your first Flutter project:
+## Run it
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+flutter pub get
+flutter run
+```
