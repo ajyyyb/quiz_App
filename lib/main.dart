@@ -21,6 +21,8 @@ class MyApp extends StatelessWidget {
 }
 
 class QuizScreen extends StatefulWidget {
+  const QuizScreen({super.key});
+
   @override
   _QuizScreenState createState() => _QuizScreenState();
 }
