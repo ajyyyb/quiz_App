@@ -21,8 +21,10 @@ class MyApp extends StatelessWidget {
 }
 
 class QuizScreen extends StatefulWidget {
+  const QuizScreen({super.key});
+
   @override
-  _QuizScreenState createState() => _QuizScreenState();
+  State<QuizScreen> createState() => _QuizScreenState();
 }
 
 class _QuizScreenState extends State<QuizScreen> {
@@ -126,11 +128,10 @@ class _QuizScreenState extends State<QuizScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 // Первая кнопка
-                Container(
+                SizedBox(
                   width: 400, // Ширина кнопки
                   child: ElevatedButton(
                     onPressed: () => checkAnswer(true),
-                    child: Text('Туура', style: TextStyle(fontSize: 50, color: Colors.white)),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
                       minimumSize: Size(250, 70),
@@ -138,15 +139,15 @@ class _QuizScreenState extends State<QuizScreen> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
+                    child: Text('Туура', style: TextStyle(fontSize: 50, color: Colors.white)),
                   ),
                 ),
                 SizedBox(height: 40), // Отступ между кнопками
                 // Вторая кнопка
-                Container(
+                SizedBox(
                   width: 400, // Ширина кнопки
                   child: ElevatedButton(
                     onPressed: () => checkAnswer(false),
-                    child: Text('Tuura emes', style: TextStyle(fontSize: 50, color: Colors.white)),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                       minimumSize: Size(250, 70),
@@ -154,6 +155,7 @@ class _QuizScreenState extends State<QuizScreen> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
+                    child: Text('Tuura emes', style: TextStyle(fontSize: 50, color: Colors.white)),
                   ),
                 ),
               ],

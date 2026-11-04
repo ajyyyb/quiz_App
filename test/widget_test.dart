@@ -1,30 +1,41 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:test_1/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+  testWidgets('answering every question correctly ends with a full score', (tester) async {
+    // A tall phone-width surface: the column of answers does not scroll.
+    tester.view.physicalSize = const Size(1170, 4000);
+    tester.view.devicePixelRatio = 3;
+    addTearDown(tester.view.reset);
+
     await tester.pumpWidget(const MyApp());
+    expect(find.text('Кыргызстанда 7 область барбы?'), findsOneWidget);
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // The answers of the four questions are: yes, yes, no, yes.
+    for (final answer in ['Туура', 'Туура', 'Tuura emes', 'Туура']) {
+      await tester.tap(find.text(answer));
+      await tester.pump();
+    }
+    await tester.pump(const Duration(seconds: 2));
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    expect(find.text('Тест завершён!'), findsOneWidget);
+    expect(find.text('Ваш результат: 4/4'), findsOneWidget);
+  });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  testWidgets('a wrong answer is counted against the score', (tester) async {
+    tester.view.physicalSize = const Size(1170, 4000);
+    tester.view.devicePixelRatio = 3;
+    addTearDown(tester.view.reset);
+
+    await tester.pumpWidget(const MyApp());
+    for (final answer in ['Tuura emes', 'Туура', 'Tuura emes', 'Туура']) {
+      await tester.tap(find.text(answer));
+      await tester.pump();
+    }
+    await tester.pump(const Duration(seconds: 2));
+
+    expect(find.text('Ваш результат: 3/4'), findsOneWidget);
   });
 }
